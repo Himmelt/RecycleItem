@@ -1,0 +1,8 @@
+name: RecycleItem
+main: org.soraworld.recycle.RecycleItem
+version: 1.0.0
+depend: [Vault]
+commands:
+  recycle:
+    description: recycle itmes for money
+    usage: /recycle
