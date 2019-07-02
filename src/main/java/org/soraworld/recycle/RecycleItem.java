@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 
 public final class RecycleItem extends JavaPlugin implements Listener {
 
-    private static final Pattern PRICE = Pattern.compile("(?<=回收价格: )\\d+(?=\\$)");
+    private static final Pattern PRICE = Pattern.compile("(?<=回收价格: )\\d+");
+    private static final Pattern ALL_COLOR_PATTERN = Pattern.compile("(?i)[&|\u00A7][0-9a-fk-or]");
 
     private VaultEconomy economy = null;
 
@@ -38,7 +39,8 @@ public final class RecycleItem extends JavaPlugin implements Listener {
                     ItemMeta meta = stack.getItemMeta();
                     if (meta.hasLore()) {
                         for (String line : meta.getLore()) {
-                            Matcher matcher = PRICE.matcher(line);
+                            String text = ALL_COLOR_PATTERN.matcher(line).replaceAll("");
+                            Matcher matcher = PRICE.matcher(text);
                             if (matcher.find()) {
                                 int price = Integer.parseInt(matcher.group());
                                 cost += price;
