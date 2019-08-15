@@ -33,7 +33,7 @@ public final class RecycleItem extends JavaPlugin implements Listener {
             PlayerInventory inv = player.getInventory();
             int size = inv.getSize();
             int cost = 0;
-            for (int i = 0; i < size; i++) {
+            for (int i = 9; i <= size; i++) {
                 ItemStack stack = inv.getItem(i);
                 if (stack != null && stack.hasItemMeta()) {
                     ItemMeta meta = stack.getItemMeta();
