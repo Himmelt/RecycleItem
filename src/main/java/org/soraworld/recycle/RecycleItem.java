@@ -19,6 +19,7 @@ public final class RecycleItem extends JavaPlugin implements Listener {
 
     private VaultEconomy economy = null;
 
+    @Override
     public void onEnable() {
         try {
             economy = new VaultEconomy();
@@ -27,13 +28,13 @@ public final class RecycleItem extends JavaPlugin implements Listener {
         }
     }
 
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (economy != null && sender instanceof Player) {
             Player player = (Player) sender;
             PlayerInventory inv = player.getInventory();
-            int size = inv.getSize();
             int cost = 0;
-            for (int i = 9; i <= size; i++) {
+            for (int i = 9; i <= 35; i++) {
                 ItemStack stack = inv.getItem(i);
                 if (stack != null && stack.hasItemMeta()) {
                     ItemMeta meta = stack.getItemMeta();
@@ -54,7 +55,9 @@ public final class RecycleItem extends JavaPlugin implements Listener {
             }
             player.sendMessage("[物品回收] 已为你回收物品，兑换了 " + cost + " 金币.");
             player.updateInventory();
-        } else sender.sendMessage("[物品回收] 此命令只能由玩家在游戏内执行!");
+        } else {
+            sender.sendMessage("[物品回收] 此命令只能由玩家在游戏内执行!");
+        }
         return true;
     }
 }

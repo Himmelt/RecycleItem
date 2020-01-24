@@ -6,6 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+/**
+ * @author Himmelt
+ */
 public class VaultEconomy {
 
     private final Economy vaultEco;
@@ -14,7 +17,9 @@ public class VaultEconomy {
     public VaultEconomy() throws Exception {
         Economy economy = null;
         RegisteredServiceProvider<Economy> provider = Bukkit.getServicesManager().getRegistration(Economy.class);
-        if (provider != null) economy = provider.getProvider();
+        if (provider != null) {
+            economy = provider.getProvider();
+        }
         if (economy == null) {
             throw new Exception("[物品回收] 没有 Vault 经济实现!");
         }
@@ -38,7 +43,7 @@ public class VaultEconomy {
     }
 
     public boolean addEco(OfflinePlayer player, double amount) {
-        return vaultEco.depositPlayer(player, amount).type == EconomyResponse.ResponseType.SUCCESS;
+        return vaultEco.depositPlayer(player, amount).transactionSuccess();
     }
 
     public double getEco(OfflinePlayer player) {
